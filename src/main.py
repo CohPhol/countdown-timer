@@ -9,10 +9,12 @@ def create_folder(folder_name):
 
 def generate_frame(hours, minutes, seconds, width=640, height=480, font_size=200):
     # Change the background color as needed
-    image = Image.new('RGB', (width, height), color=(0, 0, 0))
+    image = Image.new('RGB', (width, height), color=(255,219,172))
     draw = ImageDraw.Draw(image)
     
-    font_path = "C:/Windows/Fonts/Arial.ttf"
+    script_dir = os.path.dirname(__file__)
+    font_path = os.path.join(script_dir, '..', 'assets', 'fonts', 'Ginerin-Regular.otf')
+    
     try:
         font = ImageFont.truetype(font_path, font_size)
     except IOError:
@@ -24,9 +26,9 @@ def generate_frame(hours, minutes, seconds, width=640, height=480, font_size=200
     text_width = text_bbox[2] - text_bbox[0]
     text_height = text_bbox[3] - text_bbox[1]
     text_x = (width - text_width) // 2
-    text_y = (height - text_height) // 2
+    text_y = (height - text_height) // 3
     # Change the text color as needed
-    draw.text((text_x, text_y), text, font=font, fill=(255, 255, 255)) 
+    draw.text((text_x, text_y), text, font=font, fill=(201,162,104)) 
     
     frame = np.array(image)
     frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
@@ -49,7 +51,7 @@ def create_countdown_video(duration, unit, output_path, width=640, height=480, f
     out.release()
 
 # Parameters
-duration = 30  # Countdown duration
+duration = 1  # Countdown duration
 unit = "minutes"  # "minutes" or "hours"
 output_folder = 'timer_video'
 
