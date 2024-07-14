@@ -7,7 +7,7 @@ def create_folder(folder_name):
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
 
-def generate_frame(hours, minutes, seconds, width=640, height=480, font_size=200):
+def generate_frame(hours, minutes, seconds, width=1920, height=1080, font_size=200):
     # Change the background color as needed
     image = Image.new('RGB', (width, height), color=(255,219,172))
     draw = ImageDraw.Draw(image)
@@ -26,7 +26,7 @@ def generate_frame(hours, minutes, seconds, width=640, height=480, font_size=200
     text_width = text_bbox[2] - text_bbox[0]
     text_height = text_bbox[3] - text_bbox[1]
     text_x = (width - text_width) // 2
-    text_y = (height - text_height) // 3
+    text_y = (height - text_height) // 2.25
     # Change the text color as needed
     draw.text((text_x, text_y), text, font=font, fill=(201,162,104)) 
     
@@ -35,7 +35,7 @@ def generate_frame(hours, minutes, seconds, width=640, height=480, font_size=200
     
     return frame
 
-def create_countdown_video(duration, unit, output_path, width=640, height=480, fps=30):
+def create_countdown_video(duration, unit, output_path, width=1920, height=1080, fps=30):
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
     
@@ -51,8 +51,8 @@ def create_countdown_video(duration, unit, output_path, width=640, height=480, f
     out.release()
 
 # Parameters
-duration = 1  # Countdown duration
-unit = "minutes"  # "minutes" or "hours"
+duration = 10  # Countdown duration
+unit = "hours"  # "minutes" or "hours"
 output_folder = 'timer_video'
 
 output_filename = f"{duration}{unit}timer.mp4"
